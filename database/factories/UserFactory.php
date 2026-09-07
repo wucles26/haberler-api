@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\TenantRole;
+use App\Models\Tenant;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -41,5 +43,19 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    /**
+     * Attach the user to a tenant with the given role after creation.
+     */
+    public function withTenant(?Tenant $tenant = null, TenantRole $role = TenantRole::Admin): static
+    {
+        return $this->afterCreating(function (User $user) use ($tenant, $role): void {
+            $tenant ??= Tenant::factory()->create();
+
+            $tenant->users()->attach($user->id, [
+                'role' => $role->value,
+            ]);
+        });
     }
 }
