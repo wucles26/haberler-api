@@ -20,7 +20,8 @@ Prefer these over guessing from the generic production 500 page (`APP_DEBUG=fals
 ## Railway build must compile Vite assets
 
 `public/build` is gitignored.
-`railway.json` `buildCommand` must run Composer plus `npm ci` and `npm run build`.
+`railway.json` `buildCommand` must run Composer plus `npm run build`.
+Railpack already installs Node dependencies, so do not add a redundant `npm ci`/`npm install` in `buildCommand`.
 Without the frontend build, Blade `@vite` pages return 500 with a missing Vite manifest while `/up` can still succeed.
 
 ## Railway Node version for Vite 8
