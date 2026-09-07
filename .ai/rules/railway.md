@@ -1,6 +1,9 @@
 ---
 paths:
   - railway.json
+  - nixpacks.toml
+  - package.json
+  - .nvmrc
 ---
 
 # Railway
@@ -20,3 +23,8 @@ Prefer these over guessing from the generic production 500 page (`APP_DEBUG=fals
 `public/build` is gitignored.
 `railway.json` `buildCommand` must run Composer plus `npm ci` and `npm run build`.
 Without the frontend build, Blade `@vite` pages return 500 with a missing Vite manifest while `/up` can still succeed.
+
+## Railway Node version for Vite 8
+
+Nixpacks defaults to Node 18, which fails Vite 8 builds (`styleText` / engine mismatch).
+Keep `.nvmrc`, `package.json` `engines`, and `nixpacks.toml` (`NIXPACKS_NODE_VERSION=22` plus a recent `nixpkgsArchive`) so production builds use Node 22.12+.
