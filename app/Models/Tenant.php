@@ -34,6 +34,14 @@ class Tenant extends Model
         return $this->hasMany(TenantUser::class);
     }
 
+    /**
+     * @return HasMany<Category, $this>
+     */
+    public function categories(): HasMany
+    {
+        return $this->hasMany(Category::class);
+    }
+
     public function getRouteKeyName(): string
     {
         return 'slug';

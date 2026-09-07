@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Models\Tenant;
+use App\Policies\CategoryPolicy;
 use App\Policies\TenantPolicy;
 use App\Support\CurrentTenant;
 use Illuminate\Support\Facades\Gate;
@@ -23,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::policy(Category::class, CategoryPolicy::class);
         Gate::policy(Tenant::class, TenantPolicy::class);
     }
 }

@@ -23,4 +23,12 @@ class TenantPolicy
     {
         return $user->hasRoleInTenant($tenant, TenantRole::Admin);
     }
+
+    /**
+     * Determine whether the user can manage tenant categories.
+     */
+    public function manageCategories(User $user, Tenant $tenant): bool
+    {
+        return $user->hasRoleInTenant($tenant, TenantRole::Admin, TenantRole::Editor);
+    }
 }
