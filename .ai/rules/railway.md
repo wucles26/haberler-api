@@ -1,7 +1,6 @@
 ---
 paths:
   - railway.json
-  - nixpacks.toml
   - package.json
   - .nvmrc
 ---
@@ -26,5 +25,5 @@ Without the frontend build, Blade `@vite` pages return 500 with a missing Vite m
 
 ## Railway Node version for Vite 8
 
-Nixpacks defaults to Node 18, which fails Vite 8 builds (`styleText` / engine mismatch).
-Keep `.nvmrc`, `package.json` `engines`, and `nixpacks.toml` (`NIXPACKS_NODE_VERSION=22` plus a recent `nixpkgsArchive`) so production builds use Node 22.12+.
+Use the `RAILPACK` builder with Node `22.14.0` (`.nvmrc` + `package.json` `engines`).
+Nixpacks defaulted to Node 18 and broke Vite 8. Avoid pinning an old `nixpacks.toml` `nixpkgsArchive` that forces full package recompilation.

@@ -4,4 +4,4 @@ Before planning or editing, find the row whose globs match the file's path and r
 
 | Applies to | Rule file |
 | --- | --- |
-| railway.json, nixpacks.toml, package.json, .nvmrc | .ai/rules/railway.md |
+| railway.json, package.json, .nvmrc | .ai/rules/railway.md |
