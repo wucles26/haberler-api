@@ -31,4 +31,12 @@ class TenantPolicy
     {
         return $user->hasRoleInTenant($tenant, TenantRole::Admin, TenantRole::Editor);
     }
+
+    /**
+     * Determine whether the user can manage tenant articles.
+     */
+    public function manageArticles(User $user, Tenant $tenant): bool
+    {
+        return $user->hasRoleInTenant($tenant, TenantRole::Admin, TenantRole::Editor);
+    }
 }

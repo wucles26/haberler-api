@@ -2,29 +2,31 @@
 
 namespace App\Models;
 
-use Database\Factories\CategoryFactory;
+use Database\Factories\ArticleFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Fillable([
     'tenant_id',
-    'name',
+    'primary_category_id',
+    'title',
     'slug',
-    'description',
+    'short_description',
+    'body',
     'is_active',
-    'sort_order',
+    'is_featured',
+    'published_at',
     'meta_title',
     'meta_description',
     'is_indexable',
     'canonical_url',
 ])]
-class Category extends Model
+class Article extends Model
 {
-    /** @use HasFactory<CategoryFactory> */
+    /** @use HasFactory<ArticleFactory> */
     use HasFactory;
 
     /**
@@ -36,19 +38,19 @@ class Category extends Model
     }
 
     /**
-     * @return HasMany<Article, $this>
+     * @return BelongsTo<Category, $this>
      */
-    public function primaryArticles(): HasMany
+    public function primaryCategory(): BelongsTo
     {
-        return $this->hasMany(Article::class, 'primary_category_id');
+        return $this->belongsTo(Category::class, 'primary_category_id');
     }
 
     /**
-     * @return BelongsToMany<Article, $this>
+     * @return BelongsToMany<Category, $this>
      */
-    public function articles(): BelongsToMany
+    public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Article::class)
+        return $this->belongsToMany(Category::class)
             ->withTimestamps();
     }
 
@@ -59,8 +61,9 @@ class Category extends Model
     {
         return [
             'is_active' => 'boolean',
+            'is_featured' => 'boolean',
             'is_indexable' => 'boolean',
-            'sort_order' => 'integer',
+            'published_at' => 'datetime',
         ];
     }
 }

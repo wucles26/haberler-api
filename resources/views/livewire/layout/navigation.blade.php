@@ -57,6 +57,12 @@ new class extends Component
                                 {{ __('Categories') }}
                             </x-nav-link>
                         @endcan
+
+                        @can('manageArticles', $currentTenant)
+                            <x-nav-link :href="route('tenant.articles', $currentTenant)" :active="request()->routeIs('tenant.articles')" wire:navigate>
+                                {{ __('Articles') }}
+                            </x-nav-link>
+                        @endcan
                     @endif
                 </div>
             </div>
@@ -126,6 +132,12 @@ new class extends Component
                 @can('manageCategories', $currentTenant)
                     <x-responsive-nav-link :href="route('tenant.categories', $currentTenant)" :active="request()->routeIs('tenant.categories')" wire:navigate>
                         {{ __('Categories') }}
+                    </x-responsive-nav-link>
+                @endcan
+
+                @can('manageArticles', $currentTenant)
+                    <x-responsive-nav-link :href="route('tenant.articles', $currentTenant)" :active="request()->routeIs('tenant.articles')" wire:navigate>
+                        {{ __('Articles') }}
                     </x-responsive-nav-link>
                 @endcan
             @endif
