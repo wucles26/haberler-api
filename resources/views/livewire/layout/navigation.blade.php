@@ -63,6 +63,18 @@ new class extends Component
                                 {{ __('Articles') }}
                             </x-nav-link>
                         @endcan
+
+                    @can('managePhotoGalleries', $currentTenant)
+                        <x-nav-link :href="route('tenant.photo-galleries', $currentTenant)" :active="request()->routeIs('tenant.photo-galleries')" wire:navigate>
+                            {{ __('Photo galleries') }}
+                        </x-nav-link>
+                    @endcan
+
+                    @can('manageVideos', $currentTenant)
+                        <x-nav-link :href="route('tenant.videos', $currentTenant)" :active="request()->routeIs('tenant.videos')" wire:navigate>
+                            {{ __('Video galleries') }}
+                        </x-nav-link>
+                    @endcan
                     @endif
                 </div>
             </div>
@@ -138,6 +150,18 @@ new class extends Component
                 @can('manageArticles', $currentTenant)
                     <x-responsive-nav-link :href="route('tenant.articles', $currentTenant)" :active="request()->routeIs('tenant.articles')" wire:navigate>
                         {{ __('Articles') }}
+                    </x-responsive-nav-link>
+                @endcan
+
+                @can('managePhotoGalleries', $currentTenant)
+                    <x-responsive-nav-link :href="route('tenant.photo-galleries', $currentTenant)" :active="request()->routeIs('tenant.photo-galleries')" wire:navigate>
+                        {{ __('Photo galleries') }}
+                    </x-responsive-nav-link>
+                @endcan
+
+                @can('manageVideos', $currentTenant)
+                    <x-responsive-nav-link :href="route('tenant.videos', $currentTenant)" :active="request()->routeIs('tenant.videos')" wire:navigate>
+                        {{ __('Video galleries') }}
                     </x-responsive-nav-link>
                 @endcan
             @endif

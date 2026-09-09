@@ -50,6 +50,22 @@ class Tenant extends Model
         return $this->hasMany(Article::class);
     }
 
+    /**
+     * @return HasMany<PhotoGallery, $this>
+     */
+    public function photoGalleries(): HasMany
+    {
+        return $this->hasMany(PhotoGallery::class);
+    }
+
+    /**
+     * @return HasMany<Video, $this>
+     */
+    public function videos(): HasMany
+    {
+        return $this->hasMany(Video::class);
+    }
+
     public function getRouteKeyName(): string
     {
         return 'slug';

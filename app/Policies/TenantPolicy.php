@@ -39,4 +39,14 @@ class TenantPolicy
     {
         return $user->hasRoleInTenant($tenant, TenantRole::Admin, TenantRole::Editor);
     }
+
+    public function managePhotoGalleries(User $user, Tenant $tenant): bool
+    {
+        return $user->hasRoleInTenant($tenant, TenantRole::Admin, TenantRole::Editor);
+    }
+
+    public function manageVideos(User $user, Tenant $tenant): bool
+    {
+        return $user->hasRoleInTenant($tenant, TenantRole::Admin, TenantRole::Editor);
+    }
 }

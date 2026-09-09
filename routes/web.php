@@ -5,6 +5,8 @@ use App\Livewire\Tenants\Dashboard;
 use App\Livewire\Tenants\ManageArticles;
 use App\Livewire\Tenants\ManageCategories;
 use App\Livewire\Tenants\ManageMembers;
+use App\Livewire\Tenants\ManagePhotoGalleries;
+use App\Livewire\Tenants\ManageVideos;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
@@ -30,6 +32,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('articles', ManageArticles::class)
                 ->middleware('tenant.role:admin,editor')
                 ->name('articles');
+
+            Route::get('photo-galleries', ManagePhotoGalleries::class)
+                ->middleware('tenant.role:admin,editor')
+                ->name('photo-galleries');
+
+            Route::get('videos', ManageVideos::class)
+                ->middleware('tenant.role:admin,editor')
+                ->name('videos');
         });
 });
 
